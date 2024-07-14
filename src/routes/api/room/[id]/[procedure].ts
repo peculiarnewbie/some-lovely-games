@@ -3,7 +3,11 @@ import {
 	type DurableObjectState,
 } from "@cloudflare/workers-types";
 
-import { APIEvent, APIHandler } from "@solidjs/start/server";
+import { APIEvent } from "@solidjs/start/server";
+
+interface Env {
+	DO: DurableObjectNamespace;
+}
 
 interface CloudflareWebsocket {
 	accept(): unknown;
@@ -73,17 +77,17 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 // `fetch` isn't the only handler. If your worker runs on a Cron schedule, it will receive calls
 // to a handler named `scheduled`, which should be exported here in a similar way. We will be
 // adding other handlers for other types of events over time.
-export async function GET(context: APIEvent) {
-	return await handleErrors(context.request, async () => {
+export async function GET({ params, request, context }: APIEvent) {
+	return await handleErrors(request, async () => {
 		// We have received an HTTP request! Parse the URL and route the request.
 
-		const { name, procedure } = context.params;
+		const { name, procedure } = params;
 
 		try {
 			return await handleApiRequest(
 				name ?? "hey",
-				context.request,
-				context.locals.runtime.env
+				request,
+				context.cloudflare.env
 			);
 		} catch (err) {
 			console.error(err);
@@ -92,7 +96,7 @@ export async function GET(context: APIEvent) {
 	});
 }
 
-async function handleApiRequest(name: string, request: Request, env: ENV) {
+async function handleApiRequest(name: string, request: Request, env: Env) {
 	// We've received at API request. Route the request based on the path.
 
 	let id;

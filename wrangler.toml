@@ -1,0 +1,10 @@
+# [vars]
+# MY_VARIABLE = "my-value"
+
+# [[durable_objects.bindings]]
+# name = "Rooms"
+# class_name = "Rooms"
+
+# [[migrations]]
+# tag = "v1.1.1"          # Should be unique for each entry
+# new_classes = ["Rooms"]
