@@ -2,6 +2,7 @@ import {
 	type DurableObjectNamespace,
 	type DurableObjectState,
 } from "@cloudflare/workers-types";
+import { json } from "@solidjs/router";
 
 import { APIEvent } from "@solidjs/start/server";
 
@@ -65,6 +66,7 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 			if (err instanceof Error) {
 				return new Response(err.stack, { status: 500 });
 			}
+			return new Response(null, { status: 500 });
 		}
 	}
 }
@@ -78,37 +80,50 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 // to a handler named `scheduled`, which should be exported here in a similar way. We will be
 // adding other handlers for other types of events over time.
 export async function GET({ params, request, nativeEvent }: APIEvent) {
+	if (!nativeEvent.context.cloudflare.env)
+		return json("no env", { status: 500 });
 	return await handleErrors(request, async () => {
 		// We have received an HTTP request! Parse the URL and route the request.
 
 		const { name, procedure } = params;
+		console.log(name, procedure);
 
 		try {
 			return await handleApiRequest(
 				name ?? "hey",
 				request,
-				nativeEvent.context.cloudflare.env
+				nativeEvent.context.cloudflare.env.DO as DurableObjectNamespace
 			);
 		} catch (err) {
 			console.error(err);
-			return new Response("fails", { status: 500 });
+			return json("fails", { status: 500 });
 		}
 	});
 }
 
-async function handleApiRequest(name: string, request: Request, env: any) {
+async function handleApiRequest(
+	name: string,
+	request: Request,
+	DO: DurableObjectNamespace
+) {
 	// We've received at API request. Route the request based on the path.
+
+	console.log("creating", name);
 
 	let id;
 	if (name.match(/^[0-9a-f]{64}$/)) {
-		id = env.DO.idFromString(name);
+		id = DO.idFromString(name);
 	} else if (name.length <= 32) {
-		id = env.DO.idFromName(name);
+		id = DO.idFromName(name);
 	} else {
-		return new Response("Name too long", { status: 404 });
+		return json("Name too long", { status: 404 });
 	}
 
-	let roomObject = env.DO.get(id);
+	let roomObject = DO.get(id);
 
-	return await roomObject.fetch(request);
+	console.log("roomObject", JSON.stringify(roomObject), roomObject.id);
+
+	const res = await roomObject.fetch(request);
+	console.log(JSON.stringify(res));
+	return res;
 }
