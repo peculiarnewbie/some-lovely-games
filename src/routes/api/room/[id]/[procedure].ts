@@ -77,7 +77,7 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 // `fetch` isn't the only handler. If your worker runs on a Cron schedule, it will receive calls
 // to a handler named `scheduled`, which should be exported here in a similar way. We will be
 // adding other handlers for other types of events over time.
-export async function GET({ params, request, context }: APIEvent) {
+export async function GET({ params, request, nativeEvent }: APIEvent) {
 	return await handleErrors(request, async () => {
 		// We have received an HTTP request! Parse the URL and route the request.
 
@@ -87,7 +87,7 @@ export async function GET({ params, request, context }: APIEvent) {
 			return await handleApiRequest(
 				name ?? "hey",
 				request,
-				context.cloudflare.env
+				nativeEvent.context.cloudflare.env
 			);
 		} catch (err) {
 			console.error(err);
@@ -96,7 +96,7 @@ export async function GET({ params, request, context }: APIEvent) {
 	});
 }
 
-async function handleApiRequest(name: string, request: Request, env: Env) {
+async function handleApiRequest(name: string, request: Request, env: any) {
 	// We've received at API request. Route the request based on the path.
 
 	let id;
