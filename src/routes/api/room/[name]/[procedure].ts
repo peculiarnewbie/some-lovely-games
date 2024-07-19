@@ -1,14 +1,6 @@
-import {
-	type DurableObjectNamespace,
-	type DurableObjectState,
-} from "@cloudflare/workers-types";
+import { type DurableObjectNamespace } from "@cloudflare/workers-types";
 import { json } from "@solidjs/router";
-
 import { APIEvent } from "@solidjs/start/server";
-
-interface Env {
-	DO: DurableObjectNamespace;
-}
 
 interface CloudflareWebsocket {
 	accept(): unknown;
@@ -66,7 +58,7 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 			if (err instanceof Error) {
 				return new Response(err.stack, { status: 500 });
 			}
-			return new Response(null, { status: 500 });
+			return json("fails");
 		}
 	}
 }
@@ -79,24 +71,22 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 // `fetch` isn't the only handler. If your worker runs on a Cron schedule, it will receive calls
 // to a handler named `scheduled`, which should be exported here in a similar way. We will be
 // adding other handlers for other types of events over time.
-export async function GET({ params, request, nativeEvent }: APIEvent) {
-	if (!nativeEvent.context.cloudflare.env)
-		return json("no env", { status: 500 });
+export async function GET({ nativeEvent, request, params }: APIEvent) {
+	if (!nativeEvent.context.cloudflare.env) return json("no env");
 	return await handleErrors(request, async () => {
 		// We have received an HTTP request! Parse the URL and route the request.
-
-		const { name, procedure } = params;
-		console.log(name, procedure);
+		const roomName = params.slug as string;
+		console.log("trying", roomName, params.procedure);
 
 		try {
 			return await handleApiRequest(
-				name ?? "hey",
+				roomName ?? "hey",
 				request,
-				nativeEvent.context.cloudflare.env.DO as DurableObjectNamespace
+				nativeEvent.context.cloudflare.env
 			);
 		} catch (err) {
 			console.error(err);
-			return json("fails", { status: 500 });
+			return json("fails");
 		}
 	});
 }
@@ -104,7 +94,7 @@ export async function GET({ params, request, nativeEvent }: APIEvent) {
 async function handleApiRequest(
 	name: string,
 	request: Request,
-	DO: DurableObjectNamespace
+	env: App.Platform["env"]
 ) {
 	// We've received at API request. Route the request based on the path.
 
@@ -112,14 +102,14 @@ async function handleApiRequest(
 
 	let id;
 	if (name.match(/^[0-9a-f]{64}$/)) {
-		id = DO.idFromString(name);
+		id = env.DO.idFromString(name);
 	} else if (name.length <= 32) {
-		id = DO.idFromName(name);
+		id = env.DO.idFromName(name);
 	} else {
-		return json("Name too long", { status: 404 });
+		return new Response("Name too long", { status: 404 });
 	}
 
-	let roomObject = DO.get(id);
+	let roomObject = env.DO.get(id);
 
 	console.log("roomObject", JSON.stringify(roomObject), roomObject.id);
 
