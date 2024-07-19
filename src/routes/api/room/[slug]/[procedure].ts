@@ -35,6 +35,10 @@ interface ResponseInit {
 	webSocket?: CloudflareWebsocket;
 }
 
+interface Env {
+	DO: DurableObjectNamespace;
+}
+
 // `handleErrors()` is a little utility function that can wrap an HTTP request handler in a
 // try/catch and return errors to the client. You probably wouldn't want to use this in production
 // code but it is convenient when debugging and iterating.
@@ -58,6 +62,7 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 			if (err instanceof Error) {
 				return new Response(err.stack, { status: 500 });
 			}
+			console.log("in handle error, catch, else");
 			return json("fails");
 		}
 	}
@@ -82,20 +87,17 @@ export async function GET({ nativeEvent, request, params }: APIEvent) {
 			return await handleApiRequest(
 				roomName ?? "hey",
 				request,
-				nativeEvent.context.cloudflare.env
+				nativeEvent.context.cloudflare.env as unknown as Env
 			);
 		} catch (err) {
 			console.error(err);
+			console.log("catching get");
 			return json("fails");
 		}
 	});
 }
 
-async function handleApiRequest(
-	name: string,
-	request: Request,
-	env: App.Platform["env"]
-) {
+async function handleApiRequest(name: string, request: Request, env: Env) {
 	// We've received at API request. Route the request based on the path.
 
 	console.log("creating", name);
