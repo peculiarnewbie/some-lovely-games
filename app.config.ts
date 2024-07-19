@@ -3,10 +3,13 @@ import nitroCloudflareBindings from "nitro-cloudflare-dev";
 
 export default defineConfig({
 	server: {
+		experimental: {
+			websocket: true,
+		},
 		preset: "cloudflare-pages",
 		rollupConfig: {
 			external: ["node:async_hooks"],
 		},
-		// modules: [nitroCloudflareBindings],
+		modules: [nitroCloudflareBindings],
 	},
 });
