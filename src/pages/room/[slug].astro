@@ -14,7 +14,7 @@ const wsUrl = `wss://${url.host}/api/room/hey/websocket`;
 		<div class="text-red-200">ok</div>
 		<p>room: {room}</p>
 		<RoomClient
-		slide={room}
+		room={room ?? "default"}
 		wsUrl={wsUrl}
 		client:only="solid-js"
 		transition:name="navigation"
