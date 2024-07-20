@@ -1,6 +1,4 @@
-import { type DurableObjectNamespace } from "@cloudflare/workers-types";
-import { json } from "@solidjs/router";
-import { APIEvent } from "@solidjs/start/server";
+import type { APIContext } from "astro";
 
 interface CloudflareWebsocket {
 	accept(): unknown;
@@ -58,7 +56,6 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 			if (err instanceof Error) {
 				return new Response(err.stack, { status: 500 });
 			}
-			return json("fails");
 		}
 	}
 }
@@ -71,34 +68,27 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 // `fetch` isn't the only handler. If your worker runs on a Cron schedule, it will receive calls
 // to a handler named `scheduled`, which should be exported here in a similar way. We will be
 // adding other handlers for other types of events over time.
-export async function GET({ nativeEvent, request, params }: APIEvent) {
-	if (!nativeEvent.context.cloudflare.env) return json("no env");
-	return await handleErrors(request, async () => {
+export async function GET(context: APIContext) {
+	return await handleErrors(context.request, async () => {
 		// We have received an HTTP request! Parse the URL and route the request.
-		const roomName = params.slug as string;
-		console.log("trying", roomName, params.procedure);
+
+		const { name, procedure } = context.params;
 
 		try {
 			return await handleApiRequest(
-				roomName ?? "hey",
-				request,
-				nativeEvent.context.cloudflare.env
+				name ?? "hey",
+				context.request,
+				context.locals.runtime.env
 			);
 		} catch (err) {
 			console.error(err);
-			return json("fails");
+			return new Response("fails", { status: 500 });
 		}
 	});
 }
 
-async function handleApiRequest(
-	name: string,
-	request: Request,
-	env: App.Platform["env"]
-) {
+async function handleApiRequest(name: string, request: Request, env: ENV) {
 	// We've received at API request. Route the request based on the path.
-
-	console.log("creating", name);
 
 	let id;
 	if (name.match(/^[0-9a-f]{64}$/)) {
@@ -111,9 +101,5 @@ async function handleApiRequest(
 
 	let roomObject = env.DO.get(id);
 
-	console.log("roomObject", JSON.stringify(roomObject), roomObject.id);
-
-	const res = await roomObject.fetch(request);
-	console.log(JSON.stringify(res));
-	return res;
+	return await roomObject.fetch(request);
 }
