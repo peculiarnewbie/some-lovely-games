@@ -79,6 +79,7 @@ export async function GET(context: APIContext) {
 			return await handleApiRequest(
 				name ?? "hey",
 				context.request,
+				//@ts-expect-error
 				context.locals.runtime.env
 			);
 		} catch (err) {
@@ -88,6 +89,7 @@ export async function GET(context: APIContext) {
 	});
 }
 
+//@ts-expect-error
 async function handleApiRequest(name: string, request: Request, env: ENV) {
 	// We've received at API request. Route the request based on the path.
 
