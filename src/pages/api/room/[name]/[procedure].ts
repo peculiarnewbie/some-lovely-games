@@ -51,6 +51,7 @@ async function handleErrors(request: Request, func: () => Promise<Response>) {
 			pair[1].send(JSON.stringify({ error: err.stack }));
 			pair[1].close(1011, "Uncaught exception during session setup");
 
+			//@ts-expect-error
 			return new Response(null, { status: 101, webSocket: client });
 		} else {
 			if (err instanceof Error) {
