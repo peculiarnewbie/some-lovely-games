@@ -1,7 +1,9 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js"
-  }
+	"extends": "astro/tsconfigs/strict",
+	// "include": ["src/env.d.ts", ".tokenami/tokenami.env.d.ts"],
+	"compilerOptions": {
+		"jsx": "preserve",
+		"jsxImportSource": "solid-js",
+		"plugins": [{ "name": "@tokenami/ts-plugin" }]
+	}
 }

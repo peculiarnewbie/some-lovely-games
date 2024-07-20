@@ -1,4 +1,6 @@
 import { createEffect, createSignal, onCleanup, onMount } from "solid-js";
+import "../styles.css";
+import { css } from "@tokenami/css";
 
 let webSocket: WebSocket | null = null;
 
@@ -16,8 +18,13 @@ export default function RoomClient(props: { room: string; wsUrl: string }) {
 	});
 
 	return (
-		<div>
-			<div></div>
+		<div
+			style={css({
+				"--padding": 4,
+				"--background-color": "var(--color_primary)",
+			})}
+		>
+			<div>hey</div>
 		</div>
 	);
 }
