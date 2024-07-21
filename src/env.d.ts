@@ -9,10 +9,9 @@ type Runtime = import("@astrojs/cloudflare").Runtime<ENV>;
 
 declare namespace App {
 	interface Locals extends Runtime {}
-}
-
-declare module "@tokenami/dev" {
-	interface TokenamiConfig extends Config {
-		CI: true;
+	module "@tokenami/dev" {
+		interface TokenamiConfig extends Config {
+			CI: true;
+		}
 	}
 }

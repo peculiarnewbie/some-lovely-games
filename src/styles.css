@@ -1,23 +1,63 @@
 @layer tokenami {
   :root {
     --_grid: .25rem;
-    --color_primary: #0ea5e9;
+    --border_solid: solid;
+    --color_black: #1c202f;
+    --color_purple-0: #504d72;
+    --color_white: #f3f4f1;
+    --font-size_huge: 100px;
+    --size_full: 100%;
+    --weight_bold: 900;
   }
 
   [style] {
-    --padding: initial;
+    --font-size: initial;
+    --font-weight: initial;
     --background-color: initial;
+    --color: initial;
+    --border: initial;
+    --border-color: initial;
+    --transform: initial;
+    --padding-left: initial;
+    --padding-right: initial;
+    --align-self: initial;
+    --margin-right: initial;
+    --margin-left: initial;
+    --height: initial;
+    --display: initial;
+    --justify-content: initial;
+    --align-items: initial;
+    --flex-direction: initial;
+    --gap: initial;
+    --padding: initial;
   }
 
   @layer tk1 {
     [style] {
+      color: var(--color, revert-layer);
+      border: var(--border, revert-layer);
+      transform: var(--transform, revert-layer);
+      height: var(--height, revert-layer);
+      display: var(--display, revert-layer);
+      gap: var(--gap, revert-layer);
       padding: var(--padding, revert-layer);
     }
   }
 
   @layer tk2 {
     [style] {
+      font-size: var(--font-size, revert-layer);
+      font-weight: var(--font-weight, revert-layer);
       background-color: var(--background-color, revert-layer);
+      border-color: var(--border-color, revert-layer);
+      padding-left: var(--padding-left, revert-layer);
+      padding-right: var(--padding-right, revert-layer);
+      align-self: var(--align-self, revert-layer);
+      margin-right: var(--margin-right, revert-layer);
+      margin-left: var(--margin-left, revert-layer);
+      justify-content: var(--justify-content, revert-layer);
+      align-items: var(--align-items, revert-layer);
+      flex-direction: var(--flex-direction, revert-layer);
     }
   }
 }

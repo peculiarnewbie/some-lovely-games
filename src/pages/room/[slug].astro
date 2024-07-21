@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import RoomClient from "../../components/RoomClient";
+import RoomClient from "./RoomClient"
 
 const { room } = Astro.params;
 
@@ -9,8 +9,8 @@ const url = new URL(Astro.url);
 const wsUrl = `wss://${url.host}/api/room/hey/websocket`;
 ---
 
-<Layout title="Welcome to Astro.">
-	<main style="background-color: white;">
+<Layout title="Welcome to Astro." >
+	<main >
 		<div class="text-red-200">ok</div>
 		<p>room: {room}</p>
 		<RoomClient
