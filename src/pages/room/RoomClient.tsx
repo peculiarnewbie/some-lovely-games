@@ -4,7 +4,11 @@ import { css } from "../../css";
 
 let webSocket: WebSocket | null = null;
 
-export default function RoomClient(props: { room: string; wsUrl: string }) {
+export default function RoomClient(props: {
+	room: string;
+	wsUrl: string;
+	wsFlag: boolean;
+}) {
 	const connectWS = () => {
 		webSocket = new WebSocket(props.wsUrl);
 
@@ -19,7 +23,9 @@ export default function RoomClient(props: { room: string; wsUrl: string }) {
 	};
 
 	onMount(() => {
-		connectWS();
+		if (props.wsFlag) {
+			connectWS();
+		}
 	});
 
 	return (
