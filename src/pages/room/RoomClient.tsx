@@ -8,6 +8,10 @@ export default function RoomClient(props: { room: string; wsUrl: string }) {
 	const connectWS = () => {
 		webSocket = new WebSocket(props.wsUrl);
 
+		webSocket.onopen = () => {
+			console.log("connected");
+		};
+
 		webSocket.onmessage = (event) => {
 			const data = JSON.parse(event.data as string);
 			console.log(data);
@@ -15,7 +19,7 @@ export default function RoomClient(props: { room: string; wsUrl: string }) {
 	};
 
 	onMount(() => {
-		// connectWS();
+		connectWS();
 	});
 
 	return (
