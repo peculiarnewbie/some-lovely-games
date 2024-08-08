@@ -4,7 +4,7 @@ import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { sessionTable, userTable } from "./schema";
 
 export const client = createClient({
-	url: import.meta.env.TURSO_DATABASE_URL ?? "",
+	url: import.meta.env.TURSO_DATABASE_URL,
 	authToken: import.meta.env.TURSO_AUTH_TOKEN,
 });
 

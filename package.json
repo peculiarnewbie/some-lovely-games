@@ -1,31 +1,31 @@
 {
 	"name": "some-lovely-games",
 	"type": "module",
-	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro check && astro build",
-		"preview": "astro preview",
-		"astro": "astro"
+		"dev": "vinxi dev",
+		"build": "vinxi build",
+		"start": "vinxi start",
+		"version": "vinxi version"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.8.2",
-		"@astrojs/cloudflare": "^11.0.1",
-		"@astrojs/solid-js": "^4.4.0",
 		"@libsql/client": "^0.8.1",
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
+		"@solidjs/meta": "^0.29.4",
+		"@solidjs/router": "^0.14.1",
+		"@solidjs/start": "^1.0.6",
 		"@tokenami/css": "^0.0.59",
-		"astro": "^4.12.2",
+		"arctic": "^1.9.2",
 		"drizzle-orm": "^0.32.2",
 		"lucia": "^3.2.0",
 		"solid-js": "^1.8.18",
-		"typescript": "^5.5.3"
+		"vinxi": "^0.4.1"
+	},
+	"engines": {
+		"node": ">=18"
 	},
 	"devDependencies": {
 		"@tokenami/dev": "^0.0.59",
 		"@tokenami/ts-plugin": "^0.0.59",
-		"@types/bun": "^1.1.6",
 		"drizzle-kit": "^0.23.2"
 	}
 }

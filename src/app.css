@@ -23,13 +23,17 @@
     --align-self: initial;
     --margin-right: initial;
     --margin-left: initial;
+    --top: initial;
+    --left: initial;
+    --right: initial;
+    --bottom: initial;
+    --position: initial;
     --height: initial;
     --display: initial;
     --justify-content: initial;
     --align-items: initial;
     --flex-direction: initial;
     --gap: initial;
-    --padding: initial;
   }
 
   @layer tk1 {
@@ -37,10 +41,10 @@
       color: var(--color, revert-layer);
       border: var(--border, revert-layer);
       transform: var(--transform, revert-layer);
+      position: var(--position, revert-layer);
       height: var(--height, revert-layer);
       display: var(--display, revert-layer);
       gap: var(--gap, revert-layer);
-      padding: var(--padding, revert-layer);
     }
   }
 
@@ -55,6 +59,10 @@
       align-self: var(--align-self, revert-layer);
       margin-right: var(--margin-right, revert-layer);
       margin-left: var(--margin-left, revert-layer);
+      top: var(--top, revert-layer);
+      left: var(--left, revert-layer);
+      right: var(--right, revert-layer);
+      bottom: var(--bottom, revert-layer);
       justify-content: var(--justify-content, revert-layer);
       align-items: var(--align-items, revert-layer);
       flex-direction: var(--flex-direction, revert-layer);

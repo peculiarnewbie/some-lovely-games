@@ -1,5 +1,5 @@
 import { css } from "../css";
-import "../styles.css";
+import "../app.css";
 
 const title = css.compose({
 	"--font-size": "var(--font-size_huge)",
@@ -31,17 +31,28 @@ export default function Home() {
 	return (
 		<div
 			style={css({
-				"--height": "var(--size_full)",
-				"--display": "flex",
-				"--justify-content": "center",
-				"--align-items": "center",
-				"--flex-direction": "column",
-				"--gap": 2,
+				"--top": 0,
+				"--left": 0,
+				"--right": 0,
+				"--bottom": 0,
+				"--position": "absolute",
+				"--background-color": "var(--color_purple-0)",
 			})}
 		>
-			<div style={title({ left: true })}>YOU</div>
-			<div style={title()}>KNOW</div>
-			<div style={title({ right: true })}>IT!</div>
+			<div
+				style={css({
+					"--height": "var(--size_full)",
+					"--display": "flex",
+					"--justify-content": "center",
+					"--align-items": "center",
+					"--flex-direction": "column",
+					"--gap": 2,
+				})}
+			>
+				<div style={title({ left: true })}>YOU</div>
+				<div style={title()}>KNOW</div>
+				<div style={title({ right: true })}>IT!</div>
+			</div>
 		</div>
 	);
 }

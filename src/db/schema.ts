@@ -10,6 +10,7 @@ export type SelectUser = typeof usersTable.$inferSelect;
 
 export const userTable = sqliteTable("user", {
 	id: text("id").notNull().primaryKey(),
+	name: text("username").notNull(),
 });
 
 export const sessionTable = sqliteTable("session", {

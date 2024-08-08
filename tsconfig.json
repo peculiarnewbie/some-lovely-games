@@ -1,9 +1,21 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	// "include": ["src/env.d.ts", ".tokenami/tokenami.env.d.ts"],
+	"include": ["src/**/*.ts", "src/**/*.tsx", ".tokenami/tokenami.env.d.ts"],
 	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"plugins": [{ "name": "@tokenami/ts-plugin" }]
+		"allowJs": true,
+		"strict": true,
+		"noEmit": true,
+		"types": ["vinxi/types/client"],
+		"isolatedModules": true,
+		"plugins": [{ "name": "@tokenami/ts-plugin" }],
+		"paths": {
+			"~/*": ["./src/*"]
+		}
 	}
 }
