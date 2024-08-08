@@ -1,17 +1,12 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const usersTable = sqliteTable("users", {
-	id: integer("id").primaryKey(),
-	name: text("username").notNull(),
-});
-
-export type InsertUser = typeof usersTable.$inferInsert;
-export type SelectUser = typeof usersTable.$inferSelect;
-
 export const userTable = sqliteTable("user", {
 	id: text("id").notNull().primaryKey(),
 	name: text("username").notNull(),
 });
+
+export type InsertUser = typeof userTable.$inferInsert;
+export type SelectUser = typeof userTable.$inferSelect;
 
 export const sessionTable = sqliteTable("session", {
 	id: text("id").notNull().primaryKey(),

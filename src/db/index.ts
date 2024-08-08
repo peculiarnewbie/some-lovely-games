@@ -3,12 +3,12 @@ import { createClient } from "@libsql/client/web";
 import { DrizzleSQLiteAdapter } from "@lucia-auth/adapter-drizzle";
 import { sessionTable, userTable } from "./schema";
 
-export const client = createClient({
-	url: import.meta.env.TURSO_DATABASE_URL,
-	authToken: import.meta.env.TURSO_AUTH_TOKEN,
-});
+// export const client = createClient({
+// 	url: import.meta.env.TURSO_DATABASE_URL,
+// 	authToken: import.meta.env.TURSO_AUTH_TOKEN,
+// });
 
-export const db = drizzle(client);
+// export const db = drizzle(client);
 
 export const getDB = (url: string, token: string) => {
 	const localClient = createClient({
@@ -18,5 +18,5 @@ export const getDB = (url: string, token: string) => {
 	return drizzle(localClient);
 };
 
-export const getAdapter = () =>
-	new DrizzleSQLiteAdapter(db, sessionTable, userTable);
+// export const getAdapter = () =>
+// 	new DrizzleSQLiteAdapter(db, sessionTable, userTable);
