@@ -13,14 +13,19 @@
 		"@astrojs/check": "^0.8.2",
 		"@astrojs/cloudflare": "^11.0.1",
 		"@astrojs/solid-js": "^4.4.0",
+		"@libsql/client": "^0.8.1",
+		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"@tokenami/css": "^0.0.59",
 		"astro": "^4.12.2",
+		"drizzle-orm": "^0.32.2",
+		"lucia": "^3.2.0",
 		"solid-js": "^1.8.18",
 		"typescript": "^5.5.3"
 	},
 	"devDependencies": {
 		"@tokenami/dev": "^0.0.59",
 		"@tokenami/ts-plugin": "^0.0.59",
-		"@types/bun": "^1.1.6"
+		"@types/bun": "^1.1.6",
+		"drizzle-kit": "^0.23.2"
 	}
 }
