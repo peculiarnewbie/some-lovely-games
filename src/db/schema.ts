@@ -2,7 +2,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const userTable = sqliteTable("user", {
 	id: text("id").notNull().primaryKey(),
-	name: text("username").notNull(),
+	username: text("username").notNull(),
 });
 
 export type InsertUser = typeof userTable.$inferInsert;
@@ -14,4 +14,11 @@ export const sessionTable = sqliteTable("session", {
 		.notNull()
 		.references(() => userTable.id),
 	expiresAt: integer("expires_at").notNull(),
+});
+
+export const gameTable = sqliteTable("game", {
+	id: text("id").notNull().primaryKey(),
+	name: text("name").notNull(),
+	createdAt: integer("created_at").notNull(),
+	type: text("type").notNull(),
 });
