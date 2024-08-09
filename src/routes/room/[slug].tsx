@@ -23,7 +23,7 @@ export default function Room() {
 	};
 
 	onMount(() => {
-		if (true) {
+		if (import.meta.env.VITE_WS_FLAG === "true") {
 			connectWS();
 		}
 	});
