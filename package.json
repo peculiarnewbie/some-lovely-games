@@ -9,6 +9,7 @@
 		"db-push": "drizzle-kit push"
 	},
 	"dependencies": {
+		"@dotenvx/dotenvx": "^1.7.0",
 		"@libsql/client": "^0.8.1",
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"@solidjs/meta": "^0.29.4",
