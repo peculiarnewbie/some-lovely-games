@@ -26,6 +26,9 @@ importers:
       '@solidjs/start':
         specifier: ^1.0.6
         version: 1.0.6(rollup@4.20.0)(solid-js@1.8.19)(vinxi@0.4.1(@libsql/client@0.8.1)(@types/node@22.1.0)(drizzle-orm@0.32.2(@libsql/client@0.8.1))(ioredis@5.4.1)(lightningcss@1.23.0)(terser@5.31.5))(vite@5.4.0(@types/node@22.1.0)(lightningcss@1.23.0)(terser@5.31.5))
+      '@tanstack/solid-query':
+        specifier: ^5.52.3
+        version: 5.52.3(solid-js@1.8.19)
       '@tokenami/css':
         specifier: ^0.0.59
         version: 0.0.59(@tokenami/dev@0.0.59(typescript@5.5.4))(typescript@5.5.4)
@@ -38,6 +41,12 @@ importers:
       lucia:
         specifier: ^3.2.0
         version: 3.2.0
+      nanoid:
+        specifier: ^5.0.7
+        version: 5.0.7
+      remeda:
+        specifier: ^2.11.0
+        version: 2.11.0
       solid-js:
         specifier: ^1.8.18
         version: 1.8.19
@@ -1314,6 +1323,14 @@ packages:
 
   '@stitches/stringify@1.2.8':
     resolution: {integrity: sha512-juDrnCsfBlckOu0pFOCzEN8iX6oIbLS7vFlrqXwG0Y6yzS6EnOtbP4NGNtB7XzyF9u82jLoCDq1EmBwsgBssqQ==}
+
+  '@tanstack/query-core@5.52.3':
+    resolution: {integrity: sha512-+Gh7lXn+eoAsarvvnndgqBeJ5lOjup8qgQnrTsFuhNTEAo0H934DxEPro4s3TlmvITfDTJ3UDCy7kY8Azm0qsA==}
+
+  '@tanstack/solid-query@5.52.3':
+    resolution: {integrity: sha512-5IDvMPrV1rnGX3SDjgcixM2/f/5oPdEeFTGOwFNyAyzeWEv24CgiJQ/ao0WFusiLoZ8NsmIAlfMDnbbtF0MSLg==}
+    peerDependencies:
+      solid-js: ^1.6.0
 
   '@tokenami/config@0.0.59':
     resolution: {integrity: sha512-Jq4gMzvdXYhqQ19A78JAEaFz7Pl+ZKglvpciGvQ51OfYp28Dimkjh8R0mPs2OiJhON2RJoxQ9jW3Js4uLyDKsQ==}
@@ -2679,6 +2696,11 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  nanoid@5.0.7:
+    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+
   nitropack@2.9.7:
     resolution: {integrity: sha512-aKXvtNrWkOCMsQbsk4A0qQdBjrJ1ZcvwlTQevI/LAgLWLYc5L7Q/YiYxGLal4ITyNSlzir1Cm1D2ZxnYhmpMEw==}
     engines: {node: ^16.11.0 || >=17.0.0}
@@ -2927,6 +2949,9 @@ packages:
   redis-parser@3.0.0:
     resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
     engines: {node: '>=4'}
+
+  remeda@2.11.0:
+    resolution: {integrity: sha512-rQO+zcuNvnTcB2vBctblBARZakY0+wMNtrFGqU1+h4jm5p2APcDKQxUZG2CmMPkSQxa2nauU55GBVS/3Fo83fA==}
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -3272,6 +3297,10 @@ packages:
   type-fest@3.13.1:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
+
+  type-fest@4.26.0:
+    resolution: {integrity: sha512-OduNjVJsFbifKb57UqZ2EMP1i4u64Xwow3NYXUtBbD4vIwJdQd4+xl8YDou1dlm4DVrtwT/7Ky8z8WyCULVfxw==}
+    engines: {node: '>=16'}
 
   typescript@5.5.4:
     resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
@@ -4522,6 +4551,13 @@ snapshots:
       - vite
 
   '@stitches/stringify@1.2.8': {}
+
+  '@tanstack/query-core@5.52.3': {}
+
+  '@tanstack/solid-query@5.52.3(solid-js@1.8.19)':
+    dependencies:
+      '@tanstack/query-core': 5.52.3
+      solid-js: 1.8.19
 
   '@tokenami/config@0.0.59':
     dependencies:
@@ -5926,6 +5962,8 @@ snapshots:
 
   nanoid@3.3.7: {}
 
+  nanoid@5.0.7: {}
+
   nitropack@2.9.7(@libsql/client@0.8.1)(drizzle-orm@0.32.2(@libsql/client@0.8.1)):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
@@ -6255,6 +6293,10 @@ snapshots:
   redis-parser@3.0.0:
     dependencies:
       redis-errors: 1.2.0
+
+  remeda@2.11.0:
+    dependencies:
+      type-fest: 4.26.0
 
   require-directory@2.1.1: {}
 
@@ -6597,6 +6639,8 @@ snapshots:
   type-fest@2.19.0: {}
 
   type-fest@3.13.1: {}
+
+  type-fest@4.26.0: {}
 
   typescript@5.5.4: {}
 
