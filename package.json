@@ -1,36 +1,33 @@
 {
-	"name": "some-lovely-games",
+	"name": "example-basic",
 	"type": "module",
 	"scripts": {
 		"dev": "vinxi dev",
 		"build": "vinxi build",
 		"start": "vinxi start",
 		"version": "vinxi version",
-		"db-push": "drizzle-kit push"
+		"preview": "npm run build && npx wrangler dev",
+		"deploy": "npm run build && wrangler deploy"
 	},
 	"dependencies": {
-		"@dotenvx/dotenvx": "^1.7.0",
-		"@libsql/client": "^0.8.1",
-		"@lucia-auth/adapter-drizzle": "^1.1.0",
+		"@dotenvx/dotenvx": "^1.19.0",
 		"@solidjs/meta": "^0.29.4",
-		"@solidjs/router": "^0.14.1",
-		"@solidjs/start": "^1.0.6",
-		"@tanstack/solid-query": "^5.52.3",
-		"@tokenami/css": "^0.0.59",
-		"arctic": "^1.9.2",
-		"drizzle-orm": "^0.32.2",
-		"lucia": "^3.2.0",
-		"nanoid": "^5.0.7",
-		"remeda": "^2.11.0",
-		"solid-js": "^1.8.18",
-		"vinxi": "^0.4.1"
+		"@solidjs/router": "^0.14.7",
+		"@solidjs/start": "^1.0.8",
+		"@tokenami/css": "^0.0.66",
+		"drizzle-orm": "^0.34.1",
+		"remeda": "^2.15.0",
+		"solid-js": "^1.9.1",
+		"vinxi": "^0.4.3"
 	},
 	"engines": {
 		"node": ">=18"
 	},
 	"devDependencies": {
-		"@tokenami/dev": "^0.0.59",
-		"@tokenami/ts-plugin": "^0.0.59",
-		"drizzle-kit": "^0.23.2"
+		"@cloudflare/workers-types": "^4.20241011.0",
+		"nitropack": "^2.9.7",
+		"wrangler": "^3.80.4",
+		"@tokenami/dev": "^0.0.66",
+		"@tokenami/ts-plugin": "^0.0.66"
 	}
 }
