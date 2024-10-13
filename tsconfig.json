@@ -14,9 +14,11 @@
         "vinxi/types/client",
         "@cloudflare/workers-types/2023-07-01"
     ],
+    "plugins": [{ "name": "@tokenami/ts-plugin" }],
     "isolatedModules": true,
     "paths": {
-      "~/*": ["./src/*", "./.tokenami/tokenami.env.d.ts"]
+      "~/*": ["./src/*"]
     }
-  }
+  },
+  "include": [".tokenami/tokenami.env.d.ts", "src"],
 }

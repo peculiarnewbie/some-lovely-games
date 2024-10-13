@@ -1,3 +1,5 @@
+
+
 @layer tokenami {
   :root {
     --_grid: .25rem;
@@ -11,10 +13,7 @@
   }
 
   [style] {
-    --font-size: initial;
-    --font-weight: initial;
     --background-color: initial;
-    --color: initial;
     --border: initial;
     --border-color: initial;
     --transform: initial;

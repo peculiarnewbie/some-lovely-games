@@ -46,7 +46,7 @@ export default function Home() {
 					"--justify-content": "center",
 					"--align-items": "center",
 					"--flex-direction": "column",
-					"--gap": 2,
+					"--gap": 10,
 				})}
 			>
 				<div style={title({ left: true })}>YOU</div>
